@@ -87,6 +87,7 @@ const Navbar = () => {
     { to: "/ppc", label: "PPC Management" },
     { to: "/paid-advertising", label: "Paid Advertising" },
     { to: "/web-development", label: "Web Development" },
+    { to: "/blogs", label: "Blogs" },
     { to: "/about", label: "About" },
   ];
 
@@ -138,6 +139,11 @@ const Navbar = () => {
             <li className={style.navbar__item}>
               <Link href="/about" className={style.navbar__link}>
                 About
+              </Link>
+            </li>
+            <li className={style.navbar__item}>
+              <Link href="/blogs" className={style.navbar__link}>
+                Blogs 
               </Link>
             </li>
           </ul>
