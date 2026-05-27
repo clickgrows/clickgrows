@@ -4,51 +4,189 @@ import Link from "next/link";
 import { getBlogBySlug } from "../../lib/firebase/blogService";
 import styles from "./Blogs.module.scss";
 
-// Basic content renderer — handles **bold**, ## headings, and line breaks
-const renderContent = (content) => {
-  if (!content) return null;
-  const paragraphs = content.split(/\n\n+/);
-
-  return paragraphs.map((para, i) => {
-    const trimmed = para.trim();
-    if (!trimmed) return null;
-
-    // Heading: ## Heading Text
-    if (trimmed.startsWith("## ")) {
-      return <h2 key={i} className={styles.contentH2}>{trimmed.slice(3)}</h2>;
-    }
-
-    if (trimmed.startsWith("# ")) {
-      return <h1 key={i} className={styles.contentH1}>{trimmed.slice(2)}</h1>;
-    }
-
-    // Bullet list: lines starting with - or *
-    const lines = trimmed.split("\n");
-    const isList = lines.every((l) => l.trim().startsWith("- ") || l.trim().startsWith("* "));
-    if (isList) {
-      return (
-        <ul key={i} className={styles.contentList}>
-          {lines.map((line, j) => (
-            <li key={j}>{formatInline(line.replace(/^[-*]\s/, ""))}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    // Regular paragraph
-    return <p key={i} className={styles.contentPara}>{formatInline(trimmed)}</p>;
+// Inline formatting: **bold**, *italic*, `code`
+const formatInline = (text) => {
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**"))
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    if (part.startsWith("*") && part.endsWith("*"))
+      return <em key={i}>{part.slice(1, -1)}</em>;
+    if (part.startsWith("`") && part.endsWith("`"))
+      return <code key={i} className={styles.inlineCode}>{part.slice(1, -1)}</code>;
+    return part;
   });
 };
 
-// Bold via **text**
-const formatInline = (text) => {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={i}>{part.slice(2, -2)}</strong>;
+const isHorizontalRule = (line) => /^[-*_]{3,}\s*$/.test(line.trim());
+const isNumberedItem  = (line) => /^\d+[.)]\s/.test(line.trim());
+const isBulletItem    = (line) => /^[-*•]\s/.test(line.trim());
+const stripBullet     = (line) => line.trim().replace(/^[-*•]\s/, "");
+const stripNumbered   = (line) => line.trim().replace(/^\d+[.)]\s/, "");
+
+const renderContent = (content) => {
+  if (!content) return null;
+
+  const normalized = content.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  const lines = normalized.split("\n");
+  const elements = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Empty line
+    if (!trimmed) { i++; continue; }
+
+    // Horizontal rule — skip, don't render dashes
+    if (isHorizontalRule(trimmed)) { i++; continue; }
+
+    // H1: # Heading
+    if (/^#\s/.test(trimmed)) {
+      elements.push(
+        <h1 key={i} className={styles.contentH1}>
+          {formatInline(trimmed.replace(/^#\s/, ""))}
+        </h1>
+      );
+      i++; continue;
     }
-    return part;
-  });
+
+    // H2: ## Heading
+    if (/^##\s/.test(trimmed)) {
+      elements.push(
+        <h2 key={i} className={styles.contentH2}>
+          {formatInline(trimmed.replace(/^##\s/, ""))}
+        </h2>
+      );
+      i++; continue;
+    }
+
+    // H3: ### Heading
+    if (/^###\s/.test(trimmed)) {
+      elements.push(
+        <h3 key={i} className={styles.contentH3}>
+          {formatInline(trimmed.replace(/^###\s/, ""))}
+        </h3>
+      );
+      i++; continue;
+    }
+
+    // H4: #### Heading
+    if (/^####\s/.test(trimmed)) {
+      elements.push(
+        <h4 key={i} className={styles.contentH4}>
+          {formatInline(trimmed.replace(/^####\s/, ""))}
+        </h4>
+      );
+      i++; continue;
+    }
+
+    // H5: ##### Heading
+    if (/^#####\s/.test(trimmed)) {
+      elements.push(
+        <h5 key={i} className={styles.contentH5}>
+          {formatInline(trimmed.replace(/^#####\s/, ""))}
+        </h5>
+      );
+      i++; continue;
+    }
+
+    // H6: ###### Heading
+    if (/^######\s/.test(trimmed)) {
+      elements.push(
+        <h6 key={i} className={styles.contentH6}>
+          {formatInline(trimmed.replace(/^######\s/, ""))}
+        </h6>
+      );
+      i++; continue;
+    }
+
+    // Bold-only line → treated as H3 (e.g. **Section Title**)
+    if (/^\*\*[^*]+\*\*[:.]?\s*$/.test(trimmed)) {
+      elements.push(
+        <h3 key={i} className={styles.contentH3}>
+          {trimmed.replace(/\*\*/g, "")}
+        </h3>
+      );
+      i++; continue;
+    }
+
+    // Numbered list
+    if (isNumberedItem(trimmed)) {
+      const items = [];
+      while (i < lines.length && isNumberedItem(lines[i].trim())) {
+        items.push(lines[i].trim());
+        i++;
+      }
+      elements.push(
+        <ol key={`ol-${i}`} className={styles.contentOL}>
+          {items.map((item, j) => (
+            <li key={j}>{formatInline(stripNumbered(item))}</li>
+          ))}
+        </ol>
+      );
+      continue;
+    }
+
+    // Bullet list
+    if (isBulletItem(trimmed)) {
+      const items = [];
+      while (i < lines.length && isBulletItem(lines[i].trim())) {
+        items.push(lines[i].trim());
+        i++;
+      }
+      elements.push(
+        <ul key={`ul-${i}`} className={styles.contentList}>
+          {items.map((item, j) => (
+            <li key={j}>{formatInline(stripBullet(item))}</li>
+          ))}
+        </ul>
+      );
+      continue;
+    }
+
+    // Blockquote: > text
+    if (/^>\s/.test(trimmed)) {
+      elements.push(
+        <blockquote key={i} className={styles.contentBlockquote}>
+          {formatInline(trimmed.replace(/^>\s/, ""))}
+        </blockquote>
+      );
+      i++; continue;
+    }
+
+    // Regular paragraph
+    const paraLines = [];
+    while (
+      i < lines.length &&
+      lines[i].trim() &&
+      !isHorizontalRule(lines[i].trim()) &&
+      !/^#{1,6}\s/.test(lines[i].trim()) &&
+      !isBulletItem(lines[i].trim()) &&
+      !isNumberedItem(lines[i].trim()) &&
+      !/^>\s/.test(lines[i].trim()) &&
+      !/^\*\*[^*]+\*\*[:.]?\s*$/.test(lines[i].trim())
+    ) {
+      paraLines.push(lines[i].trim());
+      i++;
+    }
+
+    if (paraLines.length > 0) {
+      elements.push(
+        <p key={`p-${i}`} className={styles.contentPara}>
+          {paraLines.map((l, j) => (
+            <React.Fragment key={j}>
+              {j > 0 && <br />}
+              {formatInline(l)}
+            </React.Fragment>
+          ))}
+        </p>
+      );
+    }
+  }
+
+  return elements;
 };
 
 const BlogDetail = ({ slug }) => {
@@ -64,7 +202,6 @@ const BlogDetail = ({ slug }) => {
           setNotFound(true);
         } else {
           setBlog(data);
-          // Update page meta dynamically
           if (data.metaTitle) document.title = data.metaTitle;
           const metaDesc = document.querySelector('meta[name="description"]');
           if (metaDesc && data.metaDescription) {
@@ -126,13 +263,11 @@ const BlogDetail = ({ slug }) => {
   return (
     <section className={styles.blogsSection}>
       <div className={styles.container}>
-        {/* Back link */}
         <Link href="/blogs" className={styles.backLink}>
           ← Back to all blogs
         </Link>
 
         <article className={styles.articleWrapper}>
-          {/* Header */}
           <header className={styles.articleHeader}>
             {blog.category && (
               <span className={styles.badge}>{blog.category}</span>
@@ -153,12 +288,10 @@ const BlogDetail = ({ slug }) => {
             )}
           </header>
 
-          {/* Content */}
           <div className={styles.articleContent}>
             {renderContent(blog.content)}
           </div>
 
-          {/* Tags */}
           {tags.length > 0 && (
             <div className={styles.tagList}>
               {tags.map((tag) => (
