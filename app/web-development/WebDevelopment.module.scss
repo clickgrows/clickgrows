@@ -1,0 +1,1099 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.wrapperWebDevPage {
+  position: relative;
+  background: var(--bg-secondary); // Using theme variable
+  overflow-x: hidden;
+}
+
+.wrapperContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-md;
+  }
+}
+
+// Hero Section
+.wrapperHeroSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-xl 0;
+    min-height: auto;
+  }
+}
+
+.wrapperBackgroundPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrapperPatternGradient {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba($primary, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s ease-in-out infinite;
+}
+
+.wrapperPatternGrid {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  width: 400px;
+  height: 400px;
+  background-image: 
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px); // Using theme variable
+  background-size: 40px 40px;
+  opacity: 0.3;
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 30px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.wrapperHeroContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-xl;
+  align-items: center;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.wrapperHeroText {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperHeroBadge {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+  background: rgba($primary, 0.1);
+  padding: $space-xs $space-md;
+  border-radius: 100px;
+  margin-bottom: $space-md;
+  border: 2px solid $primary;
+
+}
+
+.wrapperHeroTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-sm;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2.5rem;
+  }
+}
+
+.wrapperHeroSubtitle {
+  font-size: 1.25rem;
+  color: $primary;
+  margin-bottom: $space-md;
+}
+
+.wrapperHeroDescription {
+  font-size: 1rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-xl;
+  line-height: 1.6;
+  max-width: 500px;
+
+  @media (max-width: $breakpoint-lg) {
+    max-width: 100%;
+  }
+}
+
+.wrapperHeroStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-md;
+  margin-bottom: $space-xl;
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wrapperHeroStat {
+  text-align: center;
+  padding: $space-sm;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 12px;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+.wrapperStatValue {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $tertiary;
+}
+
+.wrapperStatLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+.wrapperHeroButtons {
+  display: flex;
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-lg) {
+    justify-content: center;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+  }
+}
+
+.wrapperPrimaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  background: var(--cta-gradient); // Using theme variable
+  color: $color-white;
+  border: none;
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px -5px rgba($primary, 0.3);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba($primary, 0.4);
+    gap: $space-md;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+}
+
+.wrapperSecondaryButton {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: var(--text-primary); // Using theme variable
+  border: 2px solid var(--border-color); // Using theme variable
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+    transform: translateY(-3px);
+  }
+}
+
+.wrapperHeroImage {
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards 0.2s;
+}
+
+.wrapperImageCircle {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($color-purple-400, 0.1) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 4px solid var(--card-bg); // Using theme variable
+  box-shadow: 0 20px 40px -10px var(--shadow-color); // Using theme variable
+
+  @media (max-width: $breakpoint-md) {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.wrapperImageEmoji {
+  font-size: 8rem;
+  animation: bounce 3s ease-in-out infinite;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 6rem;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.wrapperFloatingIcons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  img{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.wrapperFloatingIcon {
+  position: absolute;
+  font-size: 2rem;
+  animation: floatIcon 3s ease-in-out infinite;
+
+  &:nth-child(1) { top: 10%; left: 0; animation-delay: 0s; }
+  &:nth-child(2) { top: 20%; right: 0; animation-delay: 0.5s; }
+  &:nth-child(3) { bottom: 20%; left: 10%; animation-delay: 1s; }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+// Section Header
+.wrapperSectionHeader {
+  text-align: center;
+  margin-bottom: $space-xl * 1.5;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+
+  .wrapperWebDevPage.visible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperSectionSubtitle {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+  background: rgba($primary, 0.1);
+  padding: $space-xs $space-md;
+  border-radius: 100px;
+  margin-bottom: $space-md;
+  border: 2px solid $primary;
+}
+
+.wrapperSectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-sm;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+.wrapperHighlight {
+  color: $primary;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: rgba($primary, 0.2);
+    z-index: -1;
+    border-radius: 4px;
+  }
+}
+
+.wrapperSectionDescription {
+  font-size: 1rem;
+  color: var(--text-secondary); // Using theme variable
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// Platforms Section
+.wrapperPlatformsSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperPlatformsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-xl;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperPlatformCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-xl;
+  border-radius: 24px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+
+  &.wordpress::before { background: #21759b; }
+  &.shopify::before { background: #96bf48; }
+  &.custom::before { background: $primary; }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 50px -15px var(--shadow-color); // Using theme variable
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.wrapperPlatformHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-md;
+  flex-wrap: wrap;
+}
+
+.wrapperPlatformIcon {
+  font-size: 2.5rem;
+  img{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.wrapperPlatformName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+}
+
+.wrapperPlatformStats {
+  font-size: 0.8rem;
+  color: $white; // Using theme variable
+  background: var(--bg-secondary); // Using theme variable
+  padding: 4px $space-sm;
+  border-radius: 20px;
+  margin-left: auto;
+}
+
+.wrapperPlatformDescription {
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-md;
+  line-height: 1.6;
+}
+
+.wrapperPlatformBestFor {
+  margin-bottom: $space-md;
+
+  strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-primary); // Using theme variable
+    margin-bottom: $space-xs;
+  }
+}
+
+.wrapperBestForTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wrapperBestForTag {
+  font-size: 0.8rem;
+  color: $white; // Using theme variable
+  background: var(--bg-secondary); // Using theme variable
+  padding: 4px $space-sm;
+  border-radius: 20px;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+.wrapperPlatformFeatures {
+  margin-bottom: $space-lg;
+}
+
+.wrapperPlatformFeature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: 8px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: $primary;
+    flex-shrink: 0;
+  }
+}
+
+.wrapperPlatformButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: $primary;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    gap: 8px;
+    color: $secondary;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+}
+
+// Comparison Section
+.wrapperComparisonSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperComparisonTable {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+.wrapperComparisonHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  background: var(--bg-secondary); // Using theme variable
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color); // Using theme variable
+  color: var(--text-primary); // Using theme variable
+}
+
+.wrapperComparisonRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border-color); // Using theme variable
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.wrapperComparisonCell {
+  padding: $space-md;
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+
+  &.wordpress { color: #21759b; }
+  &.shopify { color: #96bf48; }
+  &.custom { color: $primary; }
+}
+
+// Features Grid
+.wrapperWordPressSection,
+.wrapperShopifySection,
+.wrapperCustomSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperShopifySection {
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperCustomSection {
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperFeaturesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperFeatureCategory {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-lg;
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    box-shadow: 0 10px 30px -10px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperFeatureCategoryTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-md;
+  padding-bottom: $space-xs;
+  border-bottom: 2px solid rgba($primary, 0.2);
+}
+
+.wrapperFeatureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapperFeatureListItem {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-xs;
+  padding-left: $space-sm;
+  position: relative;
+
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+// Process Section
+.wrapperProcessSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperProcessGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperProcessCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-xl;
+  border-radius: 20px;
+  border: 1px solid var(--border-color); // Using theme variable
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+  }
+}
+
+.wrapperProcessNumber {
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba($primary, 0.1);
+  position: absolute;
+  top: $space-md;
+  right: $space-md;
+  line-height: 1;
+}
+
+.wrapperProcessTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperProcessDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-md;
+  line-height: 1.5;
+}
+
+.wrapperProcessDeliverables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wrapperProcessTag {
+  font-size: 0.75rem;
+  color: $white;
+  background: $tertiary;
+  padding: 2px $space-xs;
+  border-radius: 20px;
+}
+
+// Why Choose Us
+.wrapperWhySection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperWhyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperWhyCard {
+  text-align: center;
+  padding: $space-xl $space-lg;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 20px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+  }
+}
+
+.wrapperWhyIcon {
+  font-size: 2.5rem;
+  margin-bottom: $space-md;
+  display: inline-block;
+}
+
+.wrapperWhyTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperWhyDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.5;
+}
+
+// Tech Stack
+.wrapperTechSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperTechGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperTechCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-lg;
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+  }
+}
+
+.wrapperTechCategory {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-sm;
+  padding-bottom: $space-xs;
+  border-bottom: 2px solid rgba($primary, 0.2);
+}
+
+.wrapperTechList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wrapperTechItem {
+  font-size: 0.8rem;
+  color: $white; // Using theme variable
+  background: var(--bg-secondary); // Using theme variable
+  padding: 2px $space-xs;
+  border-radius: 20px;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+// Portfolio
+.wrapperPortfolioSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperPortfolioGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperPortfolioCard {
+  background: var(--card-bg); // Using theme variable
+  border-radius: 20px;
+  border: 1px solid var(--border-color); // Using theme variable
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    box-shadow: 0 20px 40px -10px var(--shadow-color); // Using theme variable
+
+    .wrapperPortfolioImage {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.wrapperPortfolioImage {
+  height: 120px;
+  background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($color-purple-400, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  transition: transform 0.3s ease;
+}
+
+.wrapperPortfolioContent {
+  padding: $space-lg;
+}
+
+.wrapperPortfolioName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: 4px;
+}
+
+.wrapperPortfolioPlatform {
+  font-size: 0.8rem;
+  color: $primary;
+  background: rgba($primary, 0.1);
+  padding: 2px $space-xs;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: $space-xs;
+}
+
+.wrapperPortfolioDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.5;
+}
+
+// FAQ
+.wrapperFaqSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperFaqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperFaqItem {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-lg;
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+  }
+}
+
+.wrapperFaqQuestion {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperFaqAnswer {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.5;
+}
+
+// CTA
+.wrapperCtaSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperCtaCard {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: $space-xl * 1.5;
+  background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+  border-radius: 32px;
+  color: $color-white;
+}
+
+.wrapperCtaTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: $space-sm;
+  color: $color-white;
+}
+
+.wrapperCtaText {
+  font-size: 1rem;
+  margin-bottom: $space-xl;
+  opacity: 0.9;
+  color: $color-gray-50;
+}
+
+.wrapperCtaButtons {
+  display: flex;
+  gap: $space-md;
+  justify-content: center;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.wrapperCtaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  background: $color-white;
+  color: $primary;
+  border: none;
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba($color-black, 0.2);
+    gap: $space-md;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+}
+
+.wrapperCtaSecondary {
+  background: transparent;
+  color: $color-white;
+  border: 2px solid rgba($color-white, 0.5);
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color-white;
+    transform: translateY(-3px);
+    background: rgba($color-white, 0.1);
+  }
+}
+
+// Dark theme specific adjustments
+.dark-theme {
+  .wrapperHeroStat,
+  .wrapperPlatformCard,
+  .wrapperFeatureCategory,
+  .wrapperProcessCard,
+  .wrapperWhyCard,
+  .wrapperTechCard,
+  .wrapperPortfolioCard,
+  .wrapperFaqItem {
+    background: var(--card-bg);
+  }
+
+  .wrapperPlatformStats,
+  .wrapperBestForTag,
+  .wrapperTechItem {
+    background: var(--bg-secondary);
+  }
+
+  .wrapperComparisonTable {
+    background: var(--card-bg);
+  }
+
+  .wrapperComparisonHeader {
+    background: var(--bg-secondary);
+  }
+}

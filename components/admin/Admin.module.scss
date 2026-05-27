@@ -1,0 +1,590 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// --------------------------------
+// SHARED
+// --------------------------------
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 1rem;
+  color: $color-gray-500;
+  background: #0f0f0f;
+}
+
+.toast {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+
+  &--success { background: #22c55e; color: #fff; }
+  &--error   { background: #ef4444; color: #fff; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+// --------------------------------
+// MODAL
+// --------------------------------
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #1e2027;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+
+  h3 { color: #fff; margin-bottom: 0.5rem; }
+  p  { color: $color-gray-500; margin-bottom: 1.5rem; }
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+// --------------------------------
+// LOGIN PAGE
+// --------------------------------
+.loginPage {
+  min-height: 100vh;
+  background: #0f0f0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.loginCard {
+  background: #1a1d23;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.loginLogo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: $primary;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.loginSubtitle {
+  color: $color-gray-500;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 0.75rem;
+  background: $primary;
+  color: #0f0f0f;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 0.5rem;
+
+  &:hover:not(:disabled) { opacity: 0.85; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.errorMsg {
+  color: #ef4444;
+  font-size: 0.85rem;
+  text-align: center;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+// --------------------------------
+// DASHBOARD LAYOUT
+// --------------------------------
+.dashboardPage {
+  display: flex;
+  min-height: 100vh;
+  background: #0f0f0f;
+  font-family: $font-main;
+}
+
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: #1a1d23;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
+  @media (max-width: 768px) {
+    width: 200px;
+    min-width: 200px;
+  }
+}
+
+.sidebarLogo {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 1rem;
+
+  span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $primary;
+  }
+
+  small {
+    color: $color-gray-500;
+    font-size: 0.75rem;
+  }
+}
+
+.sidebarNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 0.75rem;
+}
+
+.navItem {
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: $color-gray-200;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover { background: rgba(255,255,255,0.05); color: #fff; }
+}
+
+.navItemActive {
+  background: rgba($primary, 0.15) !important;
+  color: $primary !important;
+  font-weight: 500;
+}
+
+.sidebarFooter {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.adminEmail {
+  font-size: 0.75rem;
+  color: $color-gray-500;
+  margin-bottom: 0.5rem;
+  word-break: break-all;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: $color-gray-200;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.3);
+    color: #ef4444;
+  }
+}
+
+.dashboardMain {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+// --------------------------------
+// SECTION / TABLE
+// --------------------------------
+.section {
+  max-width: 900px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.loadingText {
+  color: $color-gray-500;
+  font-size: 0.9rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  background: #1a1d23;
+  border-radius: 12px;
+  border: 1px dashed rgba(255,255,255,0.1);
+
+  p {
+    color: $color-gray-500;
+    margin-bottom: 1rem;
+  }
+}
+
+.blogTable {
+  background: #1a1d23;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 100px 140px 130px;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $color-gray-500;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 100px 140px 130px;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: rgba(255,255,255,0.02); }
+}
+
+.blogTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  strong { color: #fff; font-size: 0.9rem; }
+}
+
+.blogSlug {
+  color: $color-gray-500;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.blogCategory {
+  color: $color-gray-200;
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  &--published { background: rgba(34,197,94,0.15); color: #22c55e; }
+  &--draft     { background: rgba(250,204,21,0.15); color: #facc15; }
+}
+
+.tableActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+// --------------------------------
+// BUTTONS
+// --------------------------------
+.btnPrimary {
+  padding: 0.5rem 1.2rem;
+  background: $primary;
+  color: #0f0f0f;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover:not(:disabled) { opacity: 0.85; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.btnSecondary {
+  padding: 0.5rem 1.2rem;
+  background: transparent;
+  color: $color-gray-200;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 7px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+  }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.btnEdit {
+  padding: 0.35rem 0.75rem;
+  background: rgba($primary, 0.15);
+  color: $primary;
+  border: 1px solid rgba($primary, 0.2);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover { background: rgba($primary, 0.25); }
+}
+
+.btnDelete {
+  padding: 0.35rem 0.75rem;
+  background: rgba(239,68,68,0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover { background: rgba(239,68,68,0.2); }
+}
+
+.btnDanger {
+  padding: 0.5rem 1.2rem;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.85; }
+}
+
+// --------------------------------
+// BLOG FORM
+// --------------------------------
+.blogForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formSection {
+  background: #1a1d23;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.formSectionTitle {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.label {
+  color: $color-gray-200;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.input, .select, .textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: $font-main;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+
+  &::placeholder { color: $color-gray-500; }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+}
+
+.select {
+  cursor: pointer;
+
+  option {
+    background: #1a1d23;
+    color: #fff;
+  }
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.contentArea {
+  @extend .textarea;
+  min-height: 400px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+.inputMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.charCount {
+  font-size: 0.75rem;
+  color: $color-gray-500;
+}
+
+.fieldError {
+  color: #ef4444;
+  font-size: 0.8rem;
+}
+
+.hint {
+  color: $color-gray-500;
+  font-size: 0.78rem;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $color-gray-200;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  input[type="radio"] {
+    accent-color: $primary;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}

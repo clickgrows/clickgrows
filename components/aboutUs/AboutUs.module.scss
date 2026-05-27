@@ -1,0 +1,789 @@
+@import '../../styles/variables';
+
+.wrapperAboutSection {
+  position: relative;
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+  overflow: hidden;
+}
+
+.wrapperBackgroundPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Removed .wrapperPatternGrid class entirely
+
+.wrapperPatternGradient {
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba($primary, 0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatSlow 25s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 30px) scale(1.05); }
+}
+
+.wrapperContainer {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-md;
+  }
+}
+
+.wrapperSectionHeader {
+  text-align: center;
+  margin-bottom: $space-xl * 1.5;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .wrapperAboutSection.visible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperSectionSubtitle {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+  padding: $space-xs $space-md;
+  border-radius: 100px;
+  margin-bottom: $space-md;
+  border: 2px solid $primary;
+}
+
+.wrapperSectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-md;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+.wrapperHighlight {
+  color: $primary;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: rgba($primary, 0.2);
+    z-index: -1;
+    border-radius: 4px;
+    animation: glow 2s ease-in-out infinite;
+  }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; width: 100%; }
+  50% { opacity: 1; width: 105%; }
+}
+
+.wrapperSectionDescription {
+  font-size: 1.125rem;
+  color: var(--text-secondary); // Using theme variable
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+  }
+}
+
+// Founder Story
+.wrapperFounderCard {
+  background: var(--card-bg); // Using theme variable
+  border-radius: 32px;
+  padding: $space-xl;
+  margin-bottom: $space-xl * 1.5;
+  box-shadow: 0 20px 40px -15px var(--shadow-color); // Using theme variable
+  border: 1px solid var(--border-color); // Using theme variable
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-lg;
+  }
+}
+
+.wrapperFounderContent {
+  display: flex;
+  gap: $space-xl;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    text-align: center;
+    gap: $space-lg;
+  }
+}
+
+.wrapperFounderImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($color-purple-400, 0.1) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid var(--card-bg); // Using theme variable
+  box-shadow: 0 10px 30px -5px var(--shadow-color); // Using theme variable
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.wrapperFounderEmoji {
+  font-size: 5rem;
+  position: relative;
+  z-index: 2;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.wrapperFounderText {
+  flex: 1;
+}
+
+.wrapperFounderName {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: 4px;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.wrapperFounderRole {
+  font-size: 1rem;
+  color: $primary;
+  margin-bottom: $space-md;
+  font-weight: 500;
+}
+
+.wrapperFounderStory {
+  font-size: 1rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.8;
+  margin-bottom: $space-md;
+}
+
+.wrapperFounderQuote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-primary); // Using theme variable
+  border-left: 4px solid $primary;
+  padding-left: $space-md;
+  margin: $space-lg 0;
+  line-height: 1.6;
+}
+
+.wrapperFounderSignature {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary); // Using theme variable
+}
+
+.wrapperSignatureLine {
+  width: 40px;
+  height: 2px;
+  background: $primary;
+}
+
+// Mission & Vision Tabs
+.wrapperMissionVision {
+  background: var(--card-bg); // Using theme variable
+  border-radius: 24px;
+  padding: $space-xl;
+  margin-bottom: $space-xl * 1.5;
+  box-shadow: 0 10px 30px -10px var(--shadow-color); // Using theme variable
+  border: 1px solid var(--border-color); // Using theme variable
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-lg;
+  }
+}
+
+.wrapperTabsHeader {
+  display: flex;
+  gap: $space-sm;
+  margin-bottom: $space-xl;
+  border-bottom: 2px solid var(--border-color); // Using theme variable
+  padding-bottom: $space-sm;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+  }
+}
+
+.wrapperTabButton {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-sm $space-lg;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-tertiary); // Using theme variable
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50px;
+  position: relative;
+
+  &.active {
+    color: $color-gray-800;
+    background: rgba($tertiary, 1);
+
+
+    .wrapperTabIcon {
+      transform: scale(1.1);
+    }
+  }
+
+  &:hover:not(.active) {
+    color: var(--text-primary); // Using theme variable
+    background: var(--bg-secondary); // Using theme variable
+  }
+}
+
+.wrapperTabIcon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.wrapperTabsContent {
+  min-height: 250px;
+}
+
+// Timeline
+.wrapperTimelineContainer {
+  padding: $space-md 0;
+}
+
+.wrapperTimelineTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-lg;
+}
+
+.wrapperTimeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: $space-lg;
+  }
+}
+
+.wrapperTimelineItem {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: row;
+    text-align: left;
+    gap: $space-md;
+  }
+}
+
+.wrapperTimelineIcon {
+  width: 60px;
+  height: 60px;
+  background: $primary;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: $space-sm;
+  border: 2px solid var(--card-bg); // Using theme variable
+  box-shadow: 0 5px 15px var(--shadow-color); // Using theme variable
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1) rotate(360deg);
+    background: $primary;
+    color: $color-white;
+  }
+}
+
+.wrapperTimelineContent {
+  flex: 1;
+}
+
+.wrapperTimelineYear {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $tertiary;
+  margin-bottom: 4px;
+}
+
+.wrapperTimelineEvent {
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.4;
+}
+
+.wrapperTimelineLine {
+  position: absolute;
+  top: 30px;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, $tertiary, $color-gray-800);
+  opacity: 0.3;
+  z-index: -1;
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+// Mission Vision Grid
+.wrapperMissionVisionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-xl;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+  }
+}
+
+.wrapperMissionCard,
+.wrapperVisionCard {
+  padding: $space-lg;
+  background: var(--bg-secondary); // Using theme variable
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px var(--shadow-color); // Using theme variable
+    border-color: $primary;
+  }
+}
+
+.wrapperMissionIcon,
+.wrapperVisionIcon {
+  font-size: 2rem;
+  margin-bottom: $space-md;
+}
+
+.wrapperMissionTitle,
+.wrapperVisionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-sm;
+}
+
+.wrapperMissionDescription,
+.wrapperVisionDescription {
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.6;
+  margin-bottom: $space-md;
+}
+
+.wrapperMissionPoints,
+.wrapperVisionPoints {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapperMissionPoint,
+.wrapperVisionPoint {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-xs;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: $primary;
+    flex-shrink: 0;
+  }
+}
+
+// Excellence Section
+.wrapperExcellenceSection {
+  margin-bottom: $space-xl * 1.5;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperExcellenceTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  text-align: center;
+  margin-bottom: $space-sm;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.wrapperExcellenceSubtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary); // Using theme variable
+  text-align: center;
+  margin-bottom: $space-xl;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wrapperExcellenceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-md;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperExcellenceCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-xl $space-lg;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px -10px var(--shadow-color); // Using theme variable
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $primary;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+
+  &.primary::before { background: $primary; }
+  &.purple::before { background: $color-purple-400; }
+  &.orange::before { background: $color-orange-400; }
+  &.teal::before { background: $color-teal-400; }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -15px var(--shadow-color); // Using theme variable
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .wrapperExcellenceIcon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+   
+  }
+}
+
+.wrapperExcellenceIcon {
+  font-size: 2.5rem;
+  margin-bottom: $space-md;
+  transition: all 0.3s ease;
+}
+
+.wrapperExcellenceCardTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+  line-height: 1.4;
+}
+
+.wrapperExcellenceDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-md;
+  line-height: 1.6;
+}
+
+.wrapperExcellenceStat {
+  display: flex;
+  align-items: baseline;
+  gap: $space-xs;
+  flex-wrap: wrap;
+}
+
+.wrapperStatNumber {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  transition: color 0.3s ease;
+
+  .primary & { color: $secondary; }
+  .purple & { color: $color-purple-400; }
+  .orange & { color: $color-orange-400; }
+  .teal & { color: $color-teal-400; }
+}
+
+.wrapperStatLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+.wrapperExcellenceLine {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at bottom right, rgba($primary, 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+// Stats Banner
+.wrapperStatsBanner {
+  background: var(--card-bg); // Using theme variable
+  border-radius: 24px;
+  padding: $space-xl;
+  margin-bottom: $space-xl * 1.5;
+  border: 1px solid rgba($primary, 0.1);
+  box-shadow: 0 10px 30px -10px var(--shadow-color); // Using theme variable
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-xl;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+    gap: $space-md;
+  }
+}
+
+.wrapperStatItem {
+  text-align: center;
+  padding: $space-md;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+
+    .wrapperStatBig {
+      color: $primary;
+    }
+  }
+}
+
+.wrapperStatBig {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+  transition: color 0.3s ease;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+.wrapperStatDesc {
+  font-size: 1rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+// Team Quote
+.wrapperTeamQuote {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $space-xl;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperQuoteIcon {
+  width: 60px;
+  height: 60px;
+  color: rgba($primary, 0.2);
+  margin-bottom: $space-md;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+.wrapperQuoteText {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-primary); // Using theme variable
+  line-height: 1.8;
+  margin-bottom: $space-md;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+  }
+}
+
+.wrapperQuoteAuthor {
+  font-size: 1rem;
+  font-weight: 500;
+  color: $primary;
+}
+
+// Dark theme specific adjustments
+.dark-theme {
+  .wrapperMissionCard,
+  .wrapperVisionCard {
+    background: var(--card-bg);
+  }
+
+  .wrapperStatsBanner {
+    background: var(--card-bg);
+  }
+}
+
+// Animation delays
+@for $i from 1 through 4 {
+  .wrapperExcellenceCard:nth-child(#{$i}) {
+    transition-delay: #{$i * 0.1 + 0.3}s;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-md) {
+  .wrapperFounderImage {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+
+    .wrapperFounderEmoji {
+      font-size: 4rem;
+    }
+  }
+
+  .wrapperFounderQuote {
+    font-size: 1rem;
+  }
+
+  .wrapperStatsGrid {
+    gap: $space-md;
+  }
+}

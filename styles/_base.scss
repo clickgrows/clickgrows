@@ -1,0 +1,30 @@
+// Reset minimal
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-main;
+  background-color: white;
+  // background: $bg-light;
+  color: $black;
+  line-height: 1.5;
+}
+
+// Headings
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  margin-bottom: $space-sm;
+}
+
+p {
+  margin-bottom: $space-sm;
+  color: $secondary;
+}

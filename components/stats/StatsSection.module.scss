@@ -1,0 +1,285 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.statsSection {
+  padding: 5rem 1rem;
+  background: var(--bg-secondary); // Using theme variable
+  position: relative;
+  overflow: hidden;
+
+  @include respond($breakpoint-md) {
+    padding: 6rem 2rem;
+  }
+
+  @include respond($breakpoint-lg) {
+    padding: 7rem 2rem;
+  }
+
+  // Header Section
+  &__header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeInUp 0.8s ease-out;
+
+    @include respond($breakpoint-md) {
+      margin-bottom: 5rem;
+    }
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    color: $white;
+    animation: fadeInDown 0.8s ease-out 0.2s both;
+    border: 2px solid $white;
+    &_icon {
+      font-size: 1.1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    &_text {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: $color-gray-50;
+      text-transform: uppercase;
+    }
+  }
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-primary); // Using theme variable
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+
+    @include respond($breakpoint-md) {
+      font-size: 3rem;
+    }
+
+    @include respond($breakpoint-lg) {
+      font-size: 3.5rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary); // Using theme variable
+    font-weight: 400;
+    margin: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+
+    @include respond($breakpoint-md) {
+      font-size: 1.25rem;
+    }
+  }
+
+  // Stats Grid
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @include respond($breakpoint-md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    @include respond($breakpoint-lg) {
+      gap: 3rem;
+    }
+  }
+
+  // Individual Stat Card
+  &__card {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--card-bg); // Using theme variable
+    border-radius: 16px;
+    box-shadow: 0 8px 30px var(--shadow-color); // Using theme variable
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+    border: 1px solid var(--border-color); // Using theme variable
+
+    // Divider line (except last card)
+    &:not(:last-child) {
+      @include respond($breakpoint-md) {
+        &::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 60%;
+          background: linear-gradient(
+            180deg,
+            transparent 0%,
+            var(--border-color) 50%,
+            transparent 100%
+          );
+        }
+      }
+    }
+
+    // Hover effect - top border
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, $secondary, $tertiary);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 50px var(--shadow-color); // Using theme variable
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .statsSection__value {
+        background: linear-gradient(135deg, $secondary 0%, $tertiary 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__value {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-primary); // Using theme variable
+    margin-bottom: 1rem;
+    line-height: 1;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include respond($breakpoint-md) {
+      font-size: 4rem;
+    }
+
+    @include respond($breakpoint-lg) {
+      font-size: 4.5rem;
+    }
+  }
+
+  &__description {
+    font-size: 0.95rem;
+    color: var(--text-secondary); // Using theme variable
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 400;
+
+    @include respond($breakpoint-md) {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Dark theme specific adjustments
+.dark-theme {
+  .statsSection {
+    &__badge {
+      box-shadow: 0 4px 15px rgba($color-primary, 0.4);
+    }
+
+    &__card {
+      &::before {
+        background: linear-gradient(90deg, $color-primary, $color-primary-dark);
+      }
+
+      &:hover {
+        .statsSection__value {
+          background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+      }
+    }
+
+    &__value {
+      color: var(--text-primary);
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .statsSection {
+    padding: 3rem 1rem;
+
+    &__title {
+      font-size: 1.75rem;
+    }
+
+    &__subtitle {
+      font-size: 1rem;
+    }
+
+    &__card {
+      padding: 2rem 1.5rem;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &__value {
+      font-size: 2.5rem;
+    }
+
+    &__description {
+      font-size: 0.9rem;
+    }
+  }
+}

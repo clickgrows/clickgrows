@@ -1,0 +1,288 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.marketingSolutions {
+    padding: 4rem 0;
+    background: #2d2d2d;
+    color: white;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include respond($breakpoint-md) {
+        padding: 5rem 0;
+    }
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1400px;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 0rem 1rem;
+    flex-direction: column-reverse;
+    @include respond($breakpoint-lg) {
+        flex-direction: row;
+    }
+}
+
+// Chart Section
+.chartSection {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    img {
+        width: 80%;
+        height: auto;
+        // display: block;
+        border-radius: 10px;
+    }
+    @include respond($breakpoint-lg) {
+        width: 30%;
+    }
+}
+
+.chartSection--visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+// Content Section
+.contentSection {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    width: 100%;
+    @include respond($breakpoint-lg) {
+        width: 70%;
+    }
+}
+
+.contentSection--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #4a4a4a;
+    padding: 0.65rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: fadeSlideDown 0.6s ease-out;
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    animation: fadeSlideUp 0.8s ease-out 0.2s backwards;
+
+    @include respond($breakpoint-md) {
+        font-size: 3rem;
+    }
+
+    @include respond($breakpoint-lg) {
+        font-size: 3.5rem;
+    }
+}
+
+.highlight {
+    color: #f7c948;
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    margin-bottom: 2rem;
+    animation: fadeSlideUp 0.8s ease-out 0.3s backwards;
+
+    @include respond($breakpoint-md) {
+        font-size: 1.05rem;
+    }
+}
+
+.servicesSection,
+.toolsSection {
+    margin-bottom: 2rem;
+    animation: fadeSlideUp 0.8s ease-out 0.4s backwards;
+}
+
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.toolsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.readLessBtn {
+    background: linear-gradient(135deg, #f7c948 0%, #e8b525 100%);
+    color: #000;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(247, 201, 72, 0.3);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(247, 201, 72, 0.4);
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+}
+
+.pillsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    max-height: 200px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.pillsContainer--expanded {
+    max-height: 500px;
+}
+
+.pill {
+    background: white;
+    color: #000;
+    padding: 0.65rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-block;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: #f7c948;
+    }
+}
+
+.ctaButton {
+    margin-top: 2rem;
+    background: #000;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeSlideUp 0.8s ease-out 0.6s backwards;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        background: #1a1a1a;
+    }
+}
+
+.ctaIcon {
+    background: linear-gradient(135deg, #f7c948 0%, #e8b525 100%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+// Animations
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes barGrow {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100%;
+    }
+}

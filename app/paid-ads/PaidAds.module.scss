@@ -1,0 +1,881 @@
+@import '../../styles/variables';
+
+.wrapperBingPage {
+  position: relative;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-md;
+  }
+}
+
+// Hero Section
+.wrapperHeroSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-xl 0;
+    min-height: auto;
+  }
+}
+
+.wrapperHeroContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-xl;
+  align-items: center;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.wrapperHeroText {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperHeroBadge {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+  background: rgba($primary, 0.1);
+  padding: $space-xs $space-md;
+  border-radius: 100px;
+  margin-bottom: $space-md;
+  border: 2px solid $white;
+}
+
+.wrapperHeroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-sm;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+.wrapperHeroSubtitle {
+  font-size: 1.25rem;
+  color: $primary;
+  margin-bottom: $space-md;
+}
+
+.wrapperHeroDescription {
+  font-size: 1rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-xl;
+  line-height: 1.6;
+  max-width: 500px;
+
+  @media (max-width: $breakpoint-lg) {
+    max-width: 100%;
+  }
+}
+
+.wrapperHeroStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-md;
+  margin-bottom: $space-xl;
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wrapperHeroStat {
+  text-align: center;
+  padding: $space-sm;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 12px;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+.wrapperStatValue {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $tertiary;
+}
+
+.wrapperStatLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+.wrapperHeroButtons {
+  display: flex;
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-lg) {
+    justify-content: center;
+  }
+}
+
+.wrapperPrimaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  background: $tertiary;
+  color: $white;
+  border: none;
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    // background: $bing-dark;
+    transform: translateY(-2px);
+    gap: $space-md;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+}
+
+.wrapperHeroImage {
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards 0.2s;
+}
+
+.wrapperImageCircle {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($secondary, 0.1) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--card-bg); // Using theme variable
+  box-shadow: 0 20px 40px -10px var(--shadow-color); // Using theme variable
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: $breakpoint-md) {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.wrapperImageEmoji {
+  animation: bounce 3s ease-in-out infinite;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+// Section Header
+.wrapperSectionHeader {
+  text-align: center;
+  margin-bottom: $space-xl;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+
+  .wrapperBingPage.visible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperSectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.wrapperHighlight {
+  color: $primary;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: rgba($primary, 0.2);
+    z-index: -1;
+    border-radius: 3px;
+  }
+}
+
+.wrapperSectionDescription {
+  font-size: 1rem;
+  color: var(--text-secondary); // Using theme variable
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+// Why Bing Section
+.wrapperWhySection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperWhyGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperWhyCard {
+  padding: $space-xl $space-lg;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease;
+  text-align: center;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.primary:hover { border-color: $primary; }
+  &.purple:hover { border-color: $color-purple-400; }
+  &.orange:hover { border-color: $color-orange-400; }
+  &.teal:hover { border-color: $color-teal-400; }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px -10px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperWhyIcon {
+  font-size: 2.5rem;
+  margin-bottom: $space-md;
+}
+
+.wrapperWhyTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperWhyDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.5;
+}
+
+// Network Section
+.wrapperNetworkSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperNetworkGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperNetworkCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-lg;
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    box-shadow: 0 10px 25px -5px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperNetworkIcon {
+  font-size: 2rem;
+  margin-bottom: $space-sm;
+}
+
+.wrapperNetworkName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperNetworkAudience {
+  font-size: 0.85rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-xs;
+  line-height: 1.4;
+}
+
+.wrapperNetworkShare {
+  font-size: 0.8rem;
+  color: $tertiary;
+  background: rgba($primary, 0.1);
+  padding: 2px $space-xs;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+// Ad Types Section
+.wrapperAdTypesSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperAdTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperAdTypeCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-xl $space-lg;
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    box-shadow: 0 10px 25px -5px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperAdTypeHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-md;
+}
+
+.wrapperAdTypeIcon {
+  font-size: 2rem;
+}
+
+.wrapperAdTypeTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+}
+
+.wrapperAdTypeDescription {
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-md;
+  line-height: 1.5;
+}
+
+.wrapperAdTypeFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs;
+}
+
+.wrapperAdTypeFeature {
+  font-size: 0.8rem;
+  color: $white; // Using theme variable
+  background: var(--bg-secondary); // Using theme variable
+  padding: 4px $space-sm;
+  border-radius: 20px;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+// Extensions Section
+.wrapperExtensionsSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperExtensionsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperExtensionCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-md;
+  border-radius: 12px;
+  border: 1px solid var(--border-color); // Using theme variable
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateX(5px);
+    border-color: $primary;
+    box-shadow: 0 5px 15px -5px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperExtensionIcon {
+  font-size: 1.5rem;
+  min-width: 40px;
+  text-align: center;
+}
+
+.wrapperExtensionContent {
+  flex: 1;
+}
+
+.wrapperExtensionName {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: 2px;
+}
+
+.wrapperExtensionDescription {
+  font-size: 0.8rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+// Match Types Section
+.wrapperMatchTypesSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperMatchTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperMatchTypeCard {
+  padding: $space-lg;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    background: var(--card-bg);
+    box-shadow: 0 10px 25px -5px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperMatchTypeTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperMatchTypeDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-sm;
+  line-height: 1.4;
+}
+
+.wrapperMatchTypeExample {
+  font-size: 0.85rem;
+  color: $tertiary;
+  background: rgba($primary, 0.1);
+  padding: $space-xs;
+  border-radius: 8px;
+}
+
+// Targeting Section
+.wrapperTargetingSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperTargetingList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wrapperTargetingItem {
+  font-size: 0.9rem;
+  color: var(--text-primary); // Using theme variable
+  padding: $space-xs $space-md;
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color); // Using theme variable
+  background: var(--card-bg); // Using theme variable
+
+
+  &:hover {
+    border-color: $primary;
+    transform: scale(1.05);
+  }
+}
+
+// Benefits List Section
+.wrapperBenefitsListSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperBenefitsList {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.wrapperBenefitListItem {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: 1rem;
+  color: var(--text-primary); // Using theme variable
+  padding: $space-xs $space-md;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 12px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    color: $primary;
+  }
+
+  &:hover {
+    transform: translateX(10px);
+    border-color: $primary;
+    background: var(--card-bg);
+  }
+}
+
+// Industries Section
+.wrapperIndustriesSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperIndustriesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  justify-content: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.wrapperIndustryItem {
+  font-size: 0.95rem;
+  color: var(--text-primary); // Using theme variable
+  background: var(--card-bg); // Using theme variable
+  padding: $space-xs $space-lg;
+  border-radius: 30px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $primary;
+    color: $color-white;
+    border-color: $primary;
+    transform: scale(1.05);
+  }
+}
+
+// Process Section
+.wrapperProcessSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperProcessSteps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-lg;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperProcessStep {
+  text-align: center;
+  padding: $space-lg;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    background: var(--card-bg);
+    box-shadow: 0 10px 25px -5px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperStepNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba($secondary, 0.8);
+  display: block;
+  margin-bottom: $space-xs;
+}
+
+.wrapperStepTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperStepDescription {
+  font-size: 0.85rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.4;
+}
+
+// FAQ Section
+.wrapperFaqSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperFaqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-lg;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapperFaqItem {
+  padding: $space-lg;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px -5px var(--shadow-color); // Using theme variable
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    box-shadow: 0 10px 25px -5px var(--shadow-color); // Using theme variable
+  }
+}
+
+.wrapperFaqQuestion {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperFaqAnswer {
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  line-height: 1.5;
+}
+
+// CTA Section
+.wrapperCtaSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+}
+
+.wrapperCtaCard {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: $space-xl * 1.5;
+  background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+  border-radius: 32px;
+  color: $color-white;
+}
+
+.wrapperCtaTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: $space-sm;
+  color: $color-white;
+}
+
+.wrapperCtaText {
+  font-size: 1rem;
+  margin-bottom: $space-xl;
+  opacity: 0.9;
+  color: $color-white;
+}
+
+.wrapperCtaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  background: $color-white;
+  color: $primary;
+  border: none;
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba($color-black, 0.2);
+    gap: $space-md;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+}
+
+// Dark theme specific adjustments
+.dark-theme {
+  .wrapperHeroStat,
+  .wrapperWhyCard,
+  .wrapperNetworkCard,
+  .wrapperAdTypeCard,
+  .wrapperExtensionCard,
+  .wrapperMatchTypeCard,
+  .wrapperTargetingItem,
+  .wrapperBenefitListItem,
+  .wrapperIndustryItem,
+  .wrapperProcessStep,
+  .wrapperFaqItem {
+    background: var(--card-bg);
+  }
+
+  .wrapperAdTypeFeature {
+    background: var(--bg-secondary);
+  }
+}

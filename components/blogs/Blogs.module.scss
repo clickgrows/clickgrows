@@ -1,0 +1,337 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// --------------------------------
+// SHARED SECTION
+// --------------------------------
+.blogsSection {
+  min-height: 80vh;
+  background: var(--body-bg, #0f0f0f);
+  padding: 4rem 0 6rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// --------------------------------
+// HERO
+// --------------------------------
+.blogsHero {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  background: rgba($primary, 0.15);
+  color: $primary;
+  border: 1px solid rgba($primary, 0.25);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary, #f9fafb);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  color: var(--text-secondary, #e5e7eb);
+  font-size: 1.05rem;
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+// --------------------------------
+// STATES
+// --------------------------------
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem;
+  color: $color-gray-500;
+
+  p { font-size: 0.9rem; }
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba($primary, 0.2);
+  border-top-color: $primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorState {
+  text-align: center;
+  padding: 3rem;
+  color: #ef4444;
+  background: rgba(239,68,68,0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(239,68,68,0.15);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+
+  h3 {
+    color: var(--text-primary, #f9fafb);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p { color: $color-gray-500; }
+}
+
+.notFound {
+  text-align: center;
+  padding: 5rem 1rem;
+
+  h2 {
+    color: var(--text-primary, #f9fafb);
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: $color-gray-500;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// --------------------------------
+// BLOG GRID
+// --------------------------------
+.blogsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.blogCard {
+  background: var(--card-bg, #1a1d23);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    border-color: rgba($primary, 0.25);
+  }
+}
+
+.cardContent {
+  padding: 1.75rem;
+}
+
+.cardCategory {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  background: rgba($primary, 0.12);
+  color: $primary;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+
+  a {
+    color: var(--text-primary, #f9fafb);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover { color: $primary; }
+  }
+}
+
+.cardExcerpt {
+  color: var(--text-secondary, #e5e7eb);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 0 0 1.25rem;
+  opacity: 0.75;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardAuthor {
+  font-size: 0.82rem;
+  color: $color-gray-500;
+  font-weight: 500;
+}
+
+.cardDate {
+  font-size: 0.8rem;
+  color: $color-gray-500;
+}
+
+.readMore {
+  display: inline-block;
+  color: $primary;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.75; }
+}
+
+// --------------------------------
+// BLOG DETAIL / ARTICLE
+// --------------------------------
+.backLink {
+  display: inline-block;
+  color: $primary;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.75; }
+}
+
+.articleWrapper {
+  background: var(--card-bg, #1a1d23);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 2.5rem;
+
+  @media (max-width: 640px) {
+    padding: 1.5rem;
+  }
+}
+
+.articleHeader {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.articleTitle {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-primary, #f9fafb);
+  margin: 0.75rem 0 1rem;
+  line-height: 1.3;
+}
+
+.articleMeta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.articleExcerpt {
+  font-size: 1.05rem;
+  color: var(--text-secondary, #e5e7eb);
+  line-height: 1.7;
+  opacity: 0.8;
+  font-style: italic;
+  margin: 0;
+}
+
+// --------------------------------
+// ARTICLE CONTENT RENDERING
+// --------------------------------
+.articleContent {
+  color: var(--text-secondary, #d1d5db);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.contentH1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary, #f9fafb);
+  margin: 2rem 0 1rem;
+}
+
+.contentH2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary, #f9fafb);
+  margin: 2rem 0 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid $primary;
+}
+
+.contentPara {
+  margin: 0 0 1.25rem;
+  line-height: 1.85;
+  opacity: 0.9;
+}
+
+.contentList {
+  margin: 0 0 1.25rem 1.5rem;
+  padding: 0;
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+}
+
+// --------------------------------
+// TAGS
+// --------------------------------
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.tag {
+  padding: 0.3rem 0.8rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  color: $color-gray-200;
+}

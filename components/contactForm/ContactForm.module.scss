@@ -1,0 +1,623 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// ─── Form Container ───────────────────────────────────────────────────────────
+.wrapperFormContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: $space-lg;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary); // Using theme variable
+  
+  @media (max-width: 400px) {
+    padding: $space-sm;
+  }
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-xl;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $primary;
+    background: rgba($primary, 0.1);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: $space-md;
+    backdrop-filter: blur(5px);
+    animation: slideInDown 0.6s ease;
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $primary;
+      animation: pulse 2s infinite;
+    }
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: $space-sm;
+    animation: slideInUp 0.6s ease 0.1s both;
+    color: var(--text-primary); // Using theme variable
+
+    span {
+      color: $primary;
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: rgba($primary, 0.2);
+        z-index: -1;
+        border-radius: 4px;
+        animation: widthPulse 2s ease-in-out infinite;
+      }
+    }
+  }
+
+  &__subtitle {
+    color: var(--text-secondary); // Using theme variable
+    font-size: 0.95rem;
+    max-width: 450px;
+    margin: 0 auto;
+    animation: slideInUp 0.6s ease 0.2s both;
+  }
+}
+
+// Background decorations
+.formBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.backgroundCircle1 {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba($primary, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s ease-in-out infinite;
+}
+
+.backgroundCircle2 {
+  position: absolute;
+  bottom: -10%;
+  left: -10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba($color-purple-400, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+.backgroundDots {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 200px;
+  height: 200px;
+  background-image: radial-gradient(var(--border-color) 2px, transparent 2px); // Using theme variable
+  background-size: 30px 30px;
+  opacity: 0.2;
+  animation: rotate 30s linear infinite;
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+.formCard {
+  background: var(--card-bg); // Using theme variable
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color); // Using theme variable
+  border-radius: 24px;
+  padding: $space-md;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px var(--shadow-color); // Using theme variable
+  transition: all 0.3s ease;
+  animation: scaleIn 0.6s ease 0.3s both;
+  
+  &:hover {
+    box-shadow: 0 30px 50px -15px var(--shadow-color); // Using theme variable
+    border-color: rgba($primary, 0.2);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $primary, $color-purple-400, $color-teal-400, $primary);
+    background-size: 300% 100%;
+    animation: gradientShift 8s ease infinite;
+  }
+}
+
+// ─── Form ─────────────────────────────────────────────────────────────────────
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  position: relative;
+  z-index: 2;
+}
+
+// ─── Field ────────────────────────────────────────────────────────────────────
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.3s ease;
+
+  &Row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &focused {
+    .field__wrapper {
+      border-color: $primary;
+      box-shadow: 0 0 0 4px rgba($primary, 0.1);
+      transform: scale(1.02);
+    }
+
+    .field__icon {
+      color: $primary;
+      transform: scale(1.1);
+    }
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary); // Using theme variable
+    font-weight: 600;
+    margin-left: 4px;
+
+    .required {
+      color: $error;
+      margin-left: 2px;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary); // Using theme variable
+    border: 2px solid var(--border-color); // Using theme variable
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+
+    &:hover {
+      border-color: var(--text-secondary); // Using theme variable
+    }
+  }
+
+  &__icon {
+    padding: 0 $space-sm 0 $space-md;
+    font-size: 1.1rem;
+    color: var(--text-secondary); // Using theme variable
+    transition: all 0.3s ease;
+  }
+
+  &__input,
+  &__textarea,
+  &__select {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary); // Using theme variable
+    font-size: 0.95rem;
+    padding: 0.85rem $space-md 0.85rem 0.85rem;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &::placeholder {
+      color: var(--text-secondary); // Using theme variable
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    &.hasError {
+      color: $error;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: var(--bg-secondary);
+    }
+  }
+
+  &__textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  &__select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+    cursor: pointer;
+
+    option {
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+  }
+
+  &__error {
+    font-size: 0.8rem;
+    color: $error;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+    animation: slideInLeft 0.3s ease;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// ─── Status Banner ────────────────────────────────────────────────────────────
+.statusBanner {
+  border-radius: 16px;
+  padding: $space-md;
+  display: flex;
+  align-items: flex-start;
+  gap: $space-sm;
+  animation: slideInUp 0.3s ease;
+
+  &Error {
+    background: rgba($error, 0.1);
+    border: 1px solid rgba($error, 0.3);
+    color: $error;
+
+    p {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+  }
+}
+
+.statusBannerIcon {
+  font-size: 1.2rem;
+}
+
+.statusBannerContent {
+  flex: 1;
+}
+
+// ─── Submit Button ────────────────────────────────────────────────────────────
+.btnSubmit {
+  width: 100%;
+  padding: $space-md $space-xl;
+  background: var(--cta-gradient); // Using theme variable
+  color: $color-white;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($color-white, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    &::before {
+      left: 100%;
+    }
+
+    svg {
+      transform: translateX(5px);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba($color-white, 0.3);
+    border-top-color: $color-white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  &.loading {
+    gap: $space-sm;
+  }
+}
+
+// ─── Success State ────────────────────────────────────────────────────────────
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-lg;
+  padding: $space-xl 0;
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba($success, 0.15);
+    border: 2px solid rgba($success, 0.3);
+    color: $success;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: scaleIn 0.5s ease, float 3s ease-in-out infinite;
+
+    svg {
+      width: 40px;
+      height: 40px;
+      stroke: $success;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary); // Using theme variable
+    animation: slideInUp 0.5s ease 0.1s both;
+  }
+
+  &__desc {
+    color: var(--text-secondary); // Using theme variable
+    font-size: 0.95rem;
+    max-width: 340px;
+    margin: 0 auto;
+    animation: slideInUp 0.5s ease 0.2s both;
+  }
+
+  &__ref {
+    font-size: 0.8rem;
+    color: var(--text-secondary); // Using theme variable
+    background: var(--bg-secondary); // Using theme variable
+    padding: $space-xs $space-md;
+    border-radius: 50px;
+    border: 1px solid var(--border-color); // Using theme variable
+    animation: slideInUp 0.5s ease 0.3s both;
+  }
+
+  .btnSubmit {
+    width: auto;
+    min-width: 200px;
+    margin-top: $space-sm;
+    animation: slideInUp 0.5s ease 0.4s both;
+  }
+}
+
+// ─── Footer Meta ──────────────────────────────────────────────────────────────
+.formMeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-lg;
+  margin-top: $space-lg;
+  animation: slideInUp 0.6s ease 0.5s both;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: $space-xs;
+  }
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+.metaDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-secondary); // Using theme variable
+}
+
+// ─── Animations ───────────────────────────────────────────────────────────────
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes widthPulse {
+  0%, 100% { width: 100%; }
+  50% { width: 90%; }
+}
+
+// Shake animation for form errors
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+// Dark theme specific adjustments
+.dark-theme {
+  .backgroundDots {
+    background-image: radial-gradient(rgba($color-white, 0.2) 2px, transparent 2px);
+  }
+
+  .field__select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    
+    option {
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+  }
+
+  .successState__ref {
+    background: var(--card-bg);
+  }
+}

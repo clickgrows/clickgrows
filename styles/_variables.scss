@@ -1,0 +1,129 @@
+// -----------------------------
+// COLOR VARIABLES
+// -----------------------------
+$primary: #a3c2f4;   // Light brown
+$secondary: #90B8F8; // Darker brown
+$tertiary: #5F85DB;   // Light brown
+$success: #22c55e;
+$warning: #facc15;
+$error: #ef4444;
+
+$color-primary: #C2A68C;
+$color-primary-dark: #4338ca;
+$color-gray-50: #f9fafb;
+$color-gray-100: #f3f4f6;
+$color-gray-200: #dadada;
+$color-gray-500: #6b7280;
+$color-gray-600: #4b5563;
+$color-gray-800: #1f2937;
+$color-gray-900: #22262e;
+$color-white: #ffffff;
+$color-black: #0f0f0f;
+
+$color-yellow-400: #facc15;
+$color-purple-400: #a78bfa;
+$color-orange-400: #fb923c;
+$color-teal-400: #2dd4bf;
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+$white: #ffffff;
+$black: #0f0f0f;
+
+// Background colors
+$bg-light: #f5f6fa;
+$bg-dark: #121212;
+
+// -----------------------------
+// TYPOGRAPHY
+// -----------------------------
+
+$font-main: var(--font-poppins), 'Poppins', sans-serif;
+// -----------------------------
+// SPACING SCALE
+// -----------------------------
+$space-xs: 0.5rem;
+$space-sm: 1rem;
+$space-md: 1.5rem;
+$space-lg: 2rem;
+$space-xl: 3rem;
+
+// Container width
+$container-width: 100%;
+
+// -----------------------------
+// THEME VARIABLES (CSS Custom Properties)
+// -----------------------------
+:root {
+  // Light theme (default)
+  // --bg-primary: #{$primary};
+  // --bg-secondary: #{$secondary};
+  // --bg-tertiary: #{$tertiary};
+  // --text-primary: #{$color-gray-600};
+  // --text-tertiary: #{$tertiary};
+  // --text-secondary: #{$color-gray-600};
+  // --nav-bg: rgba(255, 255, 255, 0.98);
+  // --dropdown-bg: #{$white};
+  // --link-color: #{$color-gray-600};
+  // --link-hover: #{$color-gray-900};
+  // --border-color: rgba(0, 0, 0, 0.1);
+  // --shadow-color: rgba(0, 0, 0, 0.1);
+  // --gradient-start: #{$primary};
+  // --gradient-end: #{$secondary};
+  // --cta-gradient: linear-gradient(135deg, #{$tertiary} 0%, #{$secondary} 100%);
+  // --arrow-filter: none;
+  // --body-bg: #{$bg-light};
+  // --card-bg: #{$white};
+  // --cta-bg: linear-gradient(135deg, #{$tertiary} 0%, #{$secondary} 100%);
+
+  // --bg-primary: linear-gradient(135deg, #{$color-gray-900} 0%, #{$color-gray-800} 100%);
+  --bg-primary: #353941;
+  // --bg-secondary: #{$color-gray-800};
+  --bg-secondary: #353941;
+  --text-primary: #{$color-gray-50};
+  --text-secondary: #{$color-gray-100};
+  --text-tertiary: #{$color-gray-50};
+
+  --nav-bg: #{rgba($color-gray-900, 0.98)};
+  --dropdown-bg: #{$color-gray-800};
+  --link-color: #{$color-gray-100};
+  --link-hover: #{$white};
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --gradient-start: #{$color-primary};
+  --gradient-end: #{$color-primary-dark};
+  --cta-gradient: linear-gradient(135deg, #{$tertiary} 0%, #{$secondary} 100%);
+  --arrow-filter: brightness(0) invert(1);
+  --body-bg: #{$bg-dark};
+  // --card-bg: #{$color-gray-800};
+  --card-bg: #26282B;
+  --cta-bg: linear-gradient(135deg, #{$bg-light} 0%, #{$primary} 100%);
+}
+
+.dark-theme {
+  // --bg-primary: linear-gradient(135deg, #{$color-gray-900} 0%, #{$color-gray-800} 100%);
+  --bg-primary: #353941;
+  // --bg-secondary: #{$color-gray-800};
+  --bg-secondary: #353941;
+  --text-primary: #{$color-gray-50};
+  --text-secondary: #{$color-gray-100};
+  --text-tertiary: #{$color-gray-50};
+
+  --nav-bg: #{rgba($color-gray-900, 0.98)};
+  --dropdown-bg: #{$color-gray-800};
+  --link-color: #{$color-gray-100};
+  --link-hover: #{$white};
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --gradient-start: #{$color-primary};
+  --gradient-end: #{$color-primary-dark};
+  --cta-gradient: linear-gradient(135deg, #{$tertiary} 0%, #{$secondary} 100%);
+  --arrow-filter: brightness(0) invert(1);
+  --body-bg: #{$bg-dark};
+  // --card-bg: #{$color-gray-800};
+  --card-bg: #26282B;
+  --cta-bg: linear-gradient(135deg, #{$bg-light} 0%, #{$primary} 100%);
+}

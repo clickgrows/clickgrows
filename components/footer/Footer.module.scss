@@ -1,0 +1,625 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.wrapperFooter {
+  position: relative;
+  background: var(--bg-primary); // Using theme variable
+  color: var(--text-secondary); // Using theme variable
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $primary, $color-purple-400, $color-teal-400, $primary);
+    background-size: 300% 100%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba($primary, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.wrapperFooterMain {
+  position: relative;
+  z-index: 2;
+  padding: $space-xl * 2 0 $space-xl;
+  border-bottom: 1px solid var(--border-color); // Using theme variable
+}
+
+.wrapperFooterContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: $space-xl;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: $space-lg;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+    padding: 0 $space-md;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+  }
+}
+
+.wrapperFooterColumn {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+.wrapperBrandContent {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.wrapperLogo {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  .wrapperLogoIcon {
+    font-size: 2rem;
+    padding: $space-xs;
+    border-radius: 12px;
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease;
+    img{
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .wrapperLogoText {
+    color: var(--text-primary); // Using theme variable
+    
+    span {
+      color: $primary;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: rgba($primary, 0.3);
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+.wrapperBrandDescription {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-sm;
+  opacity: 0.9;
+}
+
+.wrapperNewsletter {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-lg;
+  border-radius: 16px;
+  border: 1px solid var(--border-color); // Using theme variable
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--bg-secondary); // Using theme variable
+    border-color: rgba($primary, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+.wrapperNewsletterTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-xs;
+}
+
+.wrapperNewsletterText {
+  font-size: 0.85rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-md;
+  opacity: 0.8;
+}
+
+.wrapperNewsletterForm {
+  width: 100%;
+}
+
+.wrapperInputGroup {
+  display: flex;
+  gap: $space-xs;
+  background: var(--bg-secondary); // Using theme variable
+  border-radius: 50px;
+  padding: 4px;
+  border: 1px solid var(--border-color); // Using theme variable
+  transition: all 0.3s ease;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    background: var(--card-bg); // Using theme variable
+  }
+}
+
+.wrapperNewsletterInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: $space-sm $space-md;
+  color: var(--text-primary); // Using theme variable
+  font-size: 0.9rem;
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-secondary); // Using theme variable
+    opacity: 0.5;
+  }
+}
+
+.wrapperNewsletterButton {
+  background: $primary;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: $color-white;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $secondary;
+    transform: scale(1.05) rotate(90deg);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.wrapperColumnTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-lg;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, $primary, transparent);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 50px;
+  }
+}
+
+.wrapperDivider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-color), transparent); // Using theme variable
+  margin: $space-lg 0;
+}
+
+.wrapperLinkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.wrapperLinkItem {
+  line-height: 1.4;
+}
+
+.wrapperLink {
+  color: var(--text-secondary); // Using theme variable
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  transition: all 0.3s ease;
+  position: relative;
+  opacity: 0.8;
+
+  &:hover {
+    // color: $color-gray-900;
+    opacity: 1;
+    transform: translateX(8px);
+
+    .wrapperLinkDot {
+      background: $primary;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.wrapperLinkDot {
+  width: 4px;
+  height: 4px;
+  background: var(--text-secondary); // Using theme variable
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.wrapperContactBar {
+  background: var(--bg-secondary); // Using theme variable
+  border-bottom: 1px solid var(--border-color); // Using theme variable
+  padding: $space-md 0;
+}
+
+.wrapperContactContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-md;
+  }
+}
+
+.wrapperContactInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: $space-sm;
+  }
+}
+
+.wrapperContactItem {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+  opacity: 0.9;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.wrapperContactIcon {
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 4px rgba($primary, 0.3));
+}
+
+.wrapperContactLink {
+  color: var(--text-secondary); // Using theme variable
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.wrapperContactText {
+  color: var(--text-secondary); // Using theme variable
+}
+
+.wrapperFooterBottom {
+  position: relative;
+  z-index: 2;
+  padding: $space-lg 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.wrapperBottomContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-md;
+  }
+}
+
+.wrapperBottomContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-lg;
+  flex-wrap: wrap;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.wrapperCopyright {
+  p {
+    font-size: 0.9rem;
+    color: var(--text-secondary); // Using theme variable
+    opacity: 0.8;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+.wrapperMadeWith {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.wrapperHeart {
+  color: $error;
+  display: inline-block;
+  animation: heartbeat 1.5s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.wrapperSocialLinks {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperSocialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: $space-xs $space-sm;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 50px;
+  color: var(--text-secondary); // Using theme variable
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color); // Using theme variable
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img{
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+
+  &:hover {
+    background: var(--social-color);
+    border-color: var(--social-color);
+    color: $color-white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(var(--social-color), 0.3);
+
+    .wrapperSocialIcon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.wrapperSocialIcon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.wrapperSocialName {
+  @media (max-width: $breakpoint-sm) {
+    display: none;
+  }
+}
+
+.wrapperPaymentMethods {
+  display: flex;
+  gap: $space-xs;
+  padding: $space-xs $space-sm;
+  background: var(--card-bg); // Using theme variable
+  border-radius: 50px;
+  border: 1px solid var(--border-color); // Using theme variable
+}
+
+.wrapperPaymentIcon {
+  font-size: 1.2rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.wrapperBackToTop {
+  position: fixed;
+  bottom: $space-xl;
+  right: $space-xl;
+  width: 50px;
+  height: 50px;
+  background: $tertiary;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: $color-white;
+  transition: all 0.3s ease;
+  z-index: 100;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards 1s;
+
+  &:hover {
+    background: $secondary;
+    transform: translateY(-5px);
+
+    svg {
+      transform: translateY(-2px);
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    bottom: $space-lg;
+    right: $space-lg;
+    width: 45px;
+    height: 45px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Dark theme specific adjustments
+.dark-theme {
+  .wrapperFooter {
+    background: var(--bg-primary);
+  }
+
+  .wrapperNewsletter {
+    background: var(--card-bg);
+    
+    &:hover {
+      background: var(--bg-secondary);
+    }
+  }
+
+  .wrapperInputGroup {
+    background: var(--bg-secondary);
+    
+    &:focus-within {
+      background: var(--card-bg);
+    }
+  }
+
+  .wrapperSocialLink {
+    background: var(--card-bg);
+    
+    &:hover {
+      background: var(--social-color);
+    }
+  }
+
+  .wrapperPaymentMethods {
+    background: var(--card-bg);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-lg) {
+  .wrapperContactInfo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .wrapperBottomContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .wrapperSocialLinks {
+    order: 2;
+  }
+
+  .wrapperPaymentMethods {
+    order: 3;
+  }
+
+  .wrapperCopyright {
+    order: 1;
+  }
+}
+
+// Smooth scroll behavior
+html {
+  scroll-behavior: smooth;
+}

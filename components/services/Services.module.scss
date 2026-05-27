@@ -1,0 +1,450 @@
+@import '../../styles/variables';
+
+.wrapperServicesSection {
+  padding: $space-xl * 2 0;
+  background: var(--bg-secondary); // Using theme variable
+  overflow: hidden;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent); // Using theme variable
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent); // Using theme variable
+  }
+
+  // Dark theme specific background (this will be overridden by CSS variable)
+  .dark-theme & {
+    background: var(--bg-secondary);
+  }
+}
+
+.wrapperServicesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-md;
+  }
+}
+
+.wrapperSectionHeader {
+  text-align: center;
+  margin-bottom: $space-xl * 1.5;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .wrapperServicesSection.visible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapperSectionSubtitle {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+  background: rgba($primary, 0.1);
+  padding: $space-xs $space-md;
+  border-radius: 100px;
+  margin-bottom: $space-md;
+  border: 2px solid $primary;
+}
+
+.wrapperSectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-md;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+.wrapperHighlight {
+  color: $primary;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: rgba($primary, 0.2);
+    z-index: -1;
+    border-radius: 4px;
+  }
+}
+
+.wrapperSectionDescription {
+  font-size: 1.125rem;
+  color: var(--text-secondary); // Using theme variable
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+  }
+}
+
+.wrapperServicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+  margin-bottom: $space-xl * 2;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-md;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $space-md;
+  }
+}
+
+.wrapperServiceCard {
+  background: var(--card-bg); // Using theme variable
+  padding: $space-xl $space-lg;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px var(--shadow-color); // Using theme variable
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  border: 1px solid var(--border-color); // Using theme variable
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $primary;
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &.primary::before { background: $primary; }
+  &.purple::before { background: $color-purple-400; }
+  &.orange::before { background: $color-orange-400; }
+  &.teal::before { background: $color-teal-400; }
+  &.yellow::before { background: $color-yellow-400; }
+  &.success::before { background: $success; }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 30px -10px var(--shadow-color); // Using theme variable
+    border-color: transparent;
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .wrapperCardIcon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .wrapperCardLink {
+      color: $primary;
+      gap: $space-md;
+    }
+  }
+
+  .wrapperServicesSection.visible & {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: attr(data-delay);
+  }
+}
+
+.wrapperCardIcon {
+  width: 70px;
+  height: 70px;
+  background: rgba($primary, 0.1);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $space-lg;
+  transition: all 0.3s ease;
+
+  .primary & { background: rgba($primary, 0.1); }
+  .purple & { background: rgba($color-purple-400, 0.1); }
+  .orange & { background: rgba($color-orange-400, 0.1); }
+  .teal & { background: rgba($color-teal-400, 0.1); }
+  .yellow & { background: rgba($color-yellow-400, 0.1); }
+  .success & { background: rgba($success, 0.1); }
+}
+
+.wrapperIconEmoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.wrapperCardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary); // Using theme variable
+  margin-bottom: $space-sm;
+  line-height: 1.4;
+}
+
+.wrapperCardDescription {
+  font-size: 0.95rem;
+  color: var(--text-secondary); // Using theme variable
+  margin-bottom: $space-lg;
+  line-height: 1.6;
+}
+
+.wrapperCardFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  margin-bottom: $space-lg;
+}
+
+.wrapperFeatureItem {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: 0.9rem;
+  color: var(--text-secondary); // Using theme variable
+}
+
+.wrapperFeatureIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+
+  .primary & { color: $primary; }
+  .purple & { color: $color-purple-400; }
+  .orange & { color: $color-orange-400; }
+  .teal & { color: $color-teal-400; }
+  .yellow & { color: $color-yellow-400; }
+  .success & { color: $success; }
+}
+
+.wrapperCardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary); // Using theme variable
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: auto;
+
+  &:hover {
+    color: $primary;
+    gap: $space-sm;
+  }
+}
+
+.wrapperLinkArrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+  filter: var(--arrow-filter); // Using theme variable for arrow color
+}
+
+.wrapperCtaContainer {
+  // background: linear-gradient(135deg, var(--gradient-start) 0%, var(--body-bg) 100%);
+  background-color: var(--card-bg); // Using theme variable for solid background fallback
+  border-radius: 32px;
+  padding: $space-xl * 1.5;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+  box-shadow: 0 20px 40px -15px var(--shadow-color); // Using theme variable
+  border: 1px solid var(--border-color); // Using theme variable
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba($color-white, 0.1);
+    border-radius: 50%;
+    transform: rotate(25deg);
+    @media (max-width: $breakpoint-md) {
+     display: none;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    background: rgba($color-white, 0.1);
+    border-radius: 50%;
+    transform: rotate(-15deg);
+    @media (max-width: $breakpoint-md) {
+     display: none;
+    }
+  }
+
+  .wrapperServicesSection.visible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-xl;
+  }
+}
+
+.wrapperCtaContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--text-primary); // Using theme variable
+}
+
+.wrapperCtaTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: $space-sm;
+  line-height: 1.2;
+  color: var(--text-tertiary); // Using theme variable
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.wrapperCtaDescription {
+  font-size: 1.125rem;
+  margin-bottom: $space-xl;
+  opacity: 0.9;
+  line-height: 1.6;
+  color: var(--text-tertiary); // Using theme variable
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+  }
+}
+
+.wrapperCtaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  background: $tertiary; // Using theme variable
+  color: $white; // Using theme variable
+  border: none;
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    gap: $space-md;
+
+    .wrapperButtonArrow {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.wrapperButtonArrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+  // filter: brightness(0) saturate(100%) invert(30%) sepia(15%) saturate(1000%) hue-rotate(200deg); // This makes arrow match $primary color
+}
+
+// Animation delays for cards
+@for $i from 1 through 6 {
+  .wrapperServiceCard:nth-child(#{$i}) {
+    transition-delay: #{$i * 0.1}s;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-md) {
+  .wrapperServicesGrid {
+    gap: $space-md;
+  }
+
+  .wrapperServiceCard {
+    padding: $space-lg;
+  }
+}
+
+// Remove the old prefers-color-scheme media query and replace with theme classes
+// Dark theme specific overrides (only needed for elements that don't use CSS variables)
+.dark-theme {
+  .wrapperServiceCard {
+    border-color: var(--border-color);
+  }
+
+  .wrapperLinkArrow {
+    filter: brightness(0) invert(1); // White arrow in dark mode
+  }
+
+  .wrapperCtaButton {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+
+    &:hover {
+      background: $primary;
+      color: $color-white;
+    }
+  }
+
+  // .wrapperButtonArrow {
+  //   filter: brightness(0) invert(1); // White arrow in dark mode
+  // }
+
+  // .wrapperCtaButton:hover .wrapperButtonArrow {
+  //   filter: brightness(0) invert(1); // Keep white on hover
+  // }
+}

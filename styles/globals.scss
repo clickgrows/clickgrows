@@ -1,0 +1,12 @@
+@import './variables';
+@import './base';
+@import './container';
+
+body {
+  background: #f5f5f5;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+}
+
+h1 {
+  color: $primary;
+}
